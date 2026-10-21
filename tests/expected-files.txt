@@ -1,0 +1,13 @@
+tests/i18n.test.js
+tests/logic.test.js
+tests/perf.test.js
+tests/privacy.test.js
+tests/r50.test.js
+tests/ref.test.js
+tests/report.test.js
+tests/routes.test.js
+tests/score.test.js
+tests/sensitivity.test.js
+tests/smoke.test.js
+tests/sw.test.js
+tests/ui.test.js

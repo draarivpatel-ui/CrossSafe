@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "note": "Aggregates only. Raw TxDOT/H-GAC rows are not redistributed (TxDOT item licence; H-GAC states no licence).",
+  "zone": {
+    "center": [
+      29.619752,
+      -95.584352
+    ],
+    "radius_m": 3218.69
+  },
+  "aadt": {
+    "stations": 24,
+    "report_years": [
+      2025
+    ],
+    "by_road": {
+      "FM1092": {
+        "stations": 4,
+        "aadt_min": 3872,
+        "aadt_max": 35067
+      },
+      "IH0069": {
+        "stations": 9,
+        "aadt_min": 12985,
+        "aadt_max": 181000
+      },
+      "STAFFORD": {
+        "stations": 1,
+        "aadt_min": 6553,
+        "aadt_max": 6553
+      },
+      "UA0090": {
+        "stations": 9,
+        "aadt_min": 4014,
+        "aadt_max": 79086
+      },
+      "W AIRPORT": {
+        "stations": 1,
+        "aadt_min": 21357,
+        "aadt_max": 21357
+      }
+    }
+  },
+  "crashes_2020_2024": {
+    "total": 33,
+    "pedestrian": 21,
+    "bicyclist": 12,
+    "by_crash_sev_id": {
+      "1": 5,
+      "2": 16,
+      "3": 6,
+      "4": 3,
+      "5": 3
+    },
+    "by_year": {
+      "2020": 6,
+      "2021": 5,
+      "2022": 6,
+      "2023": 6,
+      "2024": 10
+    }
+  },
+  "hin": {
+    "segments": 463,
+    "routes": 344,
+    "by_tier_all": {
+      "Top 10%": 18,
+      " ": 379,
+      "Top 5%": 32,
+      "Top 15%": 18,
+      "Top 20%": 16
+    },
+    "by_tier_ped": {
+      "Top 5%": 28,
+      "Top 10%": 7,
+      " ": 428
+    }
+  },
+  "cris_2025_2026": {
+    "data_as_of": "2026-10-17",
+    "query": "Units; Crash Years 2025-2026; County FORT BEND; Unit Description 3-PEDALCYCLIST, 4-PEDESTRIAN",
+    "county": {
+      "crashes": 480,
+      "units": 504,
+      "persons": 508
+    },
+    "no_coordinates": {
+      "crashes": 148,
+      "units": 166
+    },
+    "within_2mi": {
+      "radius_m": 3218.69,
+      "crashes_floor": 17,
+      "K": 0,
+      "A": 4
+    },
+    "note": "Aggregates only (TxDOT licence). A floor: rows without coordinates cannot be placed. Never added to the 2020-24 count."
+  }
+}

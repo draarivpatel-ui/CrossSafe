@@ -1,0 +1,10 @@
+{
+  "SCHOOL_LABEL": "Escuela",
+  "ROUTE_LABEL": "Ruta guardada",
+  "ROUTE_PLACEHOLDER": "Elija una ruta guardada",
+  "ROUTE_FROM": "Desde {anchor} · {mode}",
+  "ROUTE_DEMO_START": "Inicio de demostración: entrada principal de {school} · {mode}",
+  "ROUTE_DEMO_NOTE": "Ruta de ejemplo para esta demostración; no es un trayecto real a la escuela.",
+  "ROUTE_MODE_WALK": "A pie",
+  "ROUTE_MODE_BIKE": "En bicicleta"
+}

@@ -1,0 +1,542 @@
+/* CrossSafe UI: TxDOT Cartographic & Corridor Telemetry Instrument. Phone first (320/390 px), no horizontal scroll, text >= 4.5:1. */
+:root {
+  --ground: #F6F5F0;
+  --surface: #FFFFFF;
+  --surface-alt: #EAE8DF;
+  --ink: #0F172A;
+  --muted: #334155;
+  --line: #64748B;
+  --line-subtle: #CBD5E1;
+  --accent: #0F4C81;
+  --accent-hover: #0A355C;
+  --accent-wash: #E0F2FE;
+  --danger: #991B1B;
+  --danger-wash: #FEF2F2;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ground);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border: 2px solid var(--ground);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.55 var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--ground);
+  caret-color: var(--accent);
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+
+main:focus {
+  outline: none;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0.2rem 0 0.6rem;
+  color: var(--ink);
+}
+
+h2 {
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0.5rem 0;
+  color: var(--ink);
+}
+
+h2:empty, #summary:empty, #findings:empty {
+  display: none;
+}
+
+.intro {
+  margin: 0 0 1rem;
+  color: var(--ink);
+  max-width: 72ch;
+}
+
+.telemetry-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.telemetry-pill {
+  display: inline-block;
+  padding: 0.2rem 0.52rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+.telemetry-pill strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.skip:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 10;
+}
+
+.pickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  padding: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.3rem;
+  color: var(--ink);
+}
+
+select {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  min-height: 44px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+select:disabled {
+  color: var(--muted);
+  background: var(--surface-alt);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#results, #route-card, #findings, .finding, #summary, #route-heading, #source-status {
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+#route-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+#route-card:has(#route-heading:empty):has(#summary:empty) {
+  display: none;
+}
+
+#summary {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#route-note {
+  margin: 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+#findings {
+  margin: 0;
+  padding-left: 1.75rem;
+}
+
+.finding {
+  margin: 0 0 0.85rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line-subtle);
+  border-radius: 6px;
+}
+
+.finding .street {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.finding .kind, .finding .reason {
+  display: block;
+}
+
+.finding .kind {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 0.15rem 0;
+}
+
+.chips {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  border: 1px solid var(--line);
+  background: var(--ground);
+  border-radius: 4px;
+  padding: 0.08rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+#lang {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.4rem 0.9rem;
+  margin: 0 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+#lang:hover {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+#lang-note {
+  margin: 0 0 1rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+
+/* Map: a11y-test-spec A2 'Map setup, one block' (wave 184). Never edge-to-edge (main keeps 1rem side space, >= 5 px for
+   the 3 px + 2 px outer ring); zoom buttons 44x44 (beats leaflet.css by specificity); solid white credit box. */
+#map {
+  height: 340px;
+  max-height: 60vh;
+  margin: 0 0 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+#map[hidden], #map-hint[hidden] {
+  display: none;
+}
+
+#map:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#map .leaflet-bar a {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+}
+
+#map .leaflet-control-attribution {
+  background: #fff;
+}
+
+#map-hint {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.show-on-map {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-height: 44px;
+  min-width: 44px;
+  margin-top: 0.45rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.show-on-map:hover {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+#source-status ul {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0.65rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--line-subtle);
+  border-radius: 4px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#load-status {
+  margin: 0 0 1rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+
+#load-status[hidden], #load-retry[hidden] {
+  display: none;
+}
+
+#load-retry {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.4rem 0.9rem;
+  margin: 0 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.error {
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+  padding: 0.55rem 0.8rem;
+  background: var(--danger-wash);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Letter view (wave 185, test-spec §L): button#letter-open opens article#letter. While it is open everything else in
+   main except the h1 is hidden (on screen and on paper), so the letter is its own view and Print shows only it. */
+#letter-open, #letter-tools button {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.4rem 0.95rem;
+  margin: 0 0 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+#letter-open:hover:not(:disabled), #letter-tools button:hover {
+  background: var(--accent-wash);
+}
+
+#letter-open:disabled {
+  color: var(--muted);
+  border-color: var(--line);
+  background: var(--surface-alt);
+  cursor: default;
+}
+
+#letter-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#letter-tools button {
+  margin: 0;
+}
+
+#letter[hidden] {
+  display: none;
+}
+
+main[data-letter="open"] > :not(#letter):not(h1) {
+  display: none;
+}
+
+#letter {
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+#letter h2 {
+  margin-top: 1rem;
+}
+
+#letter h3 {
+  font-size: 1rem;
+  margin: 0.75rem 0 0.25rem;
+}
+
+#letter-findings {
+  margin: 0;
+  padding-left: 1.75rem;
+}
+
+#letter-findings li {
+  margin: 0 0 0.3rem;
+}
+
+#letter-findings .street {
+  font-weight: 600;
+}
+
+#letter-dates {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+#letter-credit {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* QR + printed live link (wave 186, test-spec L5): beside the data dates and credit; wraps under them on a phone */
+#letter-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem 1.5rem;
+}
+
+#letter-meta {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+#letter-qr {
+  margin: 0.75rem 0 0;
+}
+
+#letter-qr img {
+  display: block;
+  width: 96px;
+  height: 96px;
+}
+
+#letter-url {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+@media print {
+  @page { size: Letter; margin: 0.4in; }
+  body { font-size: 10pt; line-height: 1.15; background: #fff; color: #000; }
+  main { max-width: none; padding: 0; }
+  .skip, #letter-tools { display: none !important; }
+  main[data-letter="open"] > :not(#letter) { display: none !important; }
+  #letter h2 { font-size: 13pt; margin: 0 0 0.25rem; }
+  #letter h3 { font-size: 10.5pt; margin: 0.35rem 0 0.1rem; }
+  #letter p { margin: 0 0 0.25rem; }
+  /* two columns; the gap leaves room for the second column's outside list numbers ("39.") */
+  #letter-findings { columns: 2; column-gap: 2.6em; padding-left: 2em; }
+  #letter-findings li { font-size: 10pt; margin: 0 0 0.1rem; break-inside: avoid; }
+  /* the data dates on one line ("Map data as of ... · CRIS 2025-26: not included") */
+  #letter-dates { list-style: none; padding: 0; }
+  #letter-dates li { display: inline; }
+  #letter-dates li + li::before { content: " · "; }
+  #letter-credit { font-size: 10pt; margin-top: 0.3rem; }
+  /* dates + credit on the left; on the right the printed link, then the QR (0.72 in = 33 modules incl. the quiet
+     zone, ~0.55 mm per module), bottom-aligned, so the row is no taller than the QR (39 findings still fit one page) */
+  #letter-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0.25in; align-items: end; break-inside: avoid; }
+  #letter-qr { display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 0.1in; margin: 0.15rem 0 0; }
+  #letter-qr img { width: 0.72in; height: 0.72in; }
+  #letter-url { font-size: 10pt; margin: 0; }
+}

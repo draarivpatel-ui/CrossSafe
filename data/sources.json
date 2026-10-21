@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "live_url": "https://aariv.me/CrossSafe/",
+  "live_url_qr": {
+    "file": "img/qr-live.svg",
+    "made_by": "scripts/make-qr.py",
+    "segno": "1.6.6",
+    "encoder_licence": "BSD-3-Clause",
+    "params": {
+      "error": "m",
+      "boost_error": true,
+      "micro": false,
+      "scale": 4,
+      "border": 4,
+      "omitsize": true,
+      "xmldecl": false
+    },
+    "note": "Static SVG made in the sandbox and committed; the page loads no QR library. live_url is the GitHub Pages URL (HTTP 200 on 2026-10-17T01:18Z), printed as text under the QR on the letter.",
+    "qr": "version 3, error level Q (segno raises M to Q because the same version holds it)"
+  },
+  "files": {
+    "data/derived-txdot.json": {
+      "source_url": "scripts/derive-txdot.js",
+      "fetched_at": "2026-10-16T20:10:01Z",
+      "licence": "LicenseRef-CrossSafe-derived",
+      "derived_from": [
+        "aadt",
+        "crashes-2020-2024",
+        "hin",
+        "cris-2025-2026"
+      ]
+    },
+    "data/osm-dulles.json": {
+      "source_url": "scripts/slim.js",
+      "fetched_at": "2026-10-16T20:10:01Z",
+      "licence": "ODbL-1.0",
+      "osm_base": "2026-10-16T19:16:19Z",
+      "bytes": 1509933,
+      "ways": 5966,
+      "nodes": 717,
+      "coord_decimals": 5,
+      "p2_budget_bytes": 1500000,
+      "p2_met": false,
+      "derived_from": [
+        "osm-q1"
+      ]
+    },
+    "data/raw/languages.json": {
+      "source_url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B16001&geo_ids=05000US48157",
+      "fetched_at": "2026-10-16T18:45:06Z",
+      "licence": "LicenseRef-ACS-public",
+      "data_as_of": "ACS 2024 1-year"
+    },
+    "data/raw/schools.json": {
+      "source_url": "https://nces.ed.gov/opengis/rest/services/K12_School_Locations/EDGE_GEOCODE_PUBLICSCH_2223/MapServer/0/query?where=NAME%20LIKE%20%27DULLES%25%27&outFields=NAME,NCESSCH,LAT,LON,STREET&f=json",
+      "fetched_at": "2026-10-16T18:45:04Z",
+      "licence": "LicenseRef-US-PD-NCES"
+    },
+    "data/ref/points.json": {
+      "source_url": "scripts/ref-points.js (from data/osm-dulles.json, REF_SEED 20261016)",
+      "fetched_at": "2026-10-16T20:10:01Z",
+      "licence": "ODbL-1.0",
+      "osm_base": "2026-10-16T19:16:19Z",
+      "count_points": 30
+    },
+    "data/ref/rri.json": {
+      "source_url": "scripts/ref-report.js (from data/routes/ref/{walk,bike}/*.json, data/ref/points.json, data/osm-dulles.json)",
+      "fetched_at": "2026-10-16T21:59:02Z",
+      "licence": "ODbL-1.0",
+      "osm_base": "2026-10-16T19:16:19Z",
+      "n_success": {
+        "walk": 30,
+        "bike": 30
+      }
+    },
+    "data/routes/*-bike.json": {
+      "source_url": "https://routing.openstreetmap.de/routed-bike/route/v1/driving/ (scripts/fetch-routes.js)",
+      "fetched_at": "2026-10-16T21:48:03Z",
+      "licence": "ODbL-1.0",
+      "count": 3
+    },
+    "data/routes/*-walk.json": {
+      "source_url": "https://routing.openstreetmap.de/routed-foot/route/v1/driving/ (scripts/fetch-routes.js)",
+      "fetched_at": "2026-10-16T21:48:01Z",
+      "licence": "ODbL-1.0",
+      "count": 3
+    },
+    "data/routes/anchors.json": {
+      "source_url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+      "fetched_at": "2026-10-16T21:46:26Z",
+      "licence": "ODbL-1.0",
+      "osm_base": "2026-10-16T21:41:36Z",
+      "count_anchors": 3
+    },
+    "data/routes/ref/bike/*.json": {
+      "source_url": "https://routing.openstreetmap.de/routed-bike/route/v1/driving/ (scripts/fetch-ref.js)",
+      "fetched_at": "2026-10-16T21:59:02Z",
+      "licence": "ODbL-1.0",
+      "count": 30
+    },
+    "data/routes/ref/walk/*.json": {
+      "source_url": "https://routing.openstreetmap.de/routed-foot/route/v1/driving/ (scripts/fetch-ref.js)",
+      "fetched_at": "2026-10-16T21:58:02Z",
+      "licence": "ODbL-1.0",
+      "count": 30
+    }
+  },
+  "raw": {
+    "aadt": {
+      "status": "included",
+      "source_url": "https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TxDOT_AADT_Annuals_(Public_View)/FeatureServer/0/query?where=1%3D1&geometry=-95.584352,29.619752&geometryType=esriGeometryPoint&inSR=4326&distance=3218.69&units=esriSRUnit_Meter&outSR=4326&f=json&outFields=TRFC_STATN_ID,ON_ROAD,AADT_RPT_YEAR,AADT_RPT_QTY,AADT_RPT_HIST_01_QTY,AADT_RPT_HIST_02_QTY",
+      "fetched_at": "2026-10-16T19:50:04Z",
+      "data_as_of": "2025",
+      "bytes": 6216,
+      "sha256": "12bcaf80f4bced8afed4f4288e44a8aa200dfd86538e626107d5b799609611f6",
+      "rows": 24,
+      "stored_at": "$RAW/aadt.json",
+      "clone_path": "data/raw/aadt.json",
+      "licence": "LicenseRef-TxDOT-no-redistribution",
+      "committed": false
+    },
+    "crashes-2020-2024": {
+      "status": "included",
+      "source_url": "https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TXDOT_Statewide_Bicyclist_Involved_Crashes/FeatureServer/0/query?where=pedestrian_involved_fl%3D1%20OR%20bicyclist_involved_fl%3D1&geometry=-95.584352,29.619752&geometryType=esriGeometryPoint&inSR=4326&distance=3218.69&units=esriSRUnit_Meter&outSR=4326&f=json&outFields=crash_id,crash_date,crash_time,crash_sev_id,pedestrian_involved_fl,bicyclist_involved_fl",
+      "fetched_at": "2026-10-16T19:50:05Z",
+      "data_as_of": "2020-2024",
+      "bytes": 8247,
+      "sha256": "408b5b7d872f5cdbe4b72b46595a5874313b85a7e5e4daf10544f984b99db7eb",
+      "rows": 33,
+      "stored_at": "$RAW/crashes-2020-2024.json",
+      "clone_path": "data/raw/crashes-2020-2024.json",
+      "licence": "LicenseRef-TxDOT-no-redistribution",
+      "committed": false
+    },
+    "cris-2025-2026": {
+      "status": "included",
+      "source_url": "https://cris.dot.state.tx.us/public/Query/app/home",
+      "query": "Units; Crash Years 2025-2026; County FORT BEND; Unit Description 3-PEDALCYCLIST, 4-PEDESTRIAN",
+      "fetched_at": "2026-10-17T22:06:59Z",
+      "data_as_of": "2026-10-17",
+      "bytes": 63596,
+      "sha256": "17cb291978e70ac83314b2d157c60d4a5300653a603b65ddb1e0e2f7f60bba5c",
+      "rows": 504,
+      "stored_at": "$RAW/crashes-2025-2026.json",
+      "clone_path": "data/raw/crashes-2025-2026.json",
+      "licence": "LicenseRef-TxDOT-no-redistribution",
+      "committed": false
+    },
+    "hin": {
+      "status": "included",
+      "source_url": "https://services2.arcgis.com/S5d6CWOTC6u65yob/arcgis/rest/services/High_Injury_Network/FeatureServer/0/query?where=1%3D1&geometry=-95.584352,29.619752&geometryType=esriGeometryPoint&inSR=4326&distance=3218.69&units=esriSRUnit_Meter&outSR=4326&f=json&outFields=ria_rte_id,frm_dfo,to_dfo,jurisdictn,hin_all,tier_all,hin_ped,tier_ped,hin_bike,tier_bike,hin_vru,K_ped_cnt,K_bike_cnt,A_ped_cnt,A_bike_cnt,B_ped_cnt,B_bike_cnt",
+      "fetched_at": "2026-10-16T19:50:06Z",
+      "data_as_of": "draft Safety Action Plan layer",
+      "bytes": 273965,
+      "sha256": "dafb6c01b9a4785e500e6474c77513b2da125b652731175d95a2a5cd1ffc5898",
+      "rows": 463,
+      "stored_at": "$RAW/hin.json",
+      "clone_path": "data/raw/hin.json",
+      "licence": "LicenseRef-HGAC-none-stated",
+      "committed": false
+    },
+    "osm-q1": {
+      "status": "included",
+      "source_url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+      "query_file": "scripts/q1.overpassql",
+      "fetched_at": "2026-10-16T19:18:14Z",
+      "osm_base": "2026-10-16T19:16:19Z",
+      "bytes": 4395853,
+      "sha256": "32f6dbcfdc01e227ec8b504ec68ee63355cf7126c70e48978ba4869041ac3e29",
+      "elements": 6683,
+      "stored_at": "$RAW/osm-q1.json",
+      "clone_path": "data/raw/osm-q1.json",
+      "licence": "ODbL-1.0",
+      "committed": false
+    }
+  }
+}

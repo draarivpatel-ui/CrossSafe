@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; connect-src 'self' https:; object-src 'none'; base-uri 'self'">
+  <title>CrossSafe</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/app.js" defer></script>
+  <!-- No JavaScript (wave 187): the pickers, map and results cannot work, so they are hidden and #nojs says why. -->
+  <noscript><style>#lang, #load-status, .pickers, #letter-open, #map, #map-hint, #results, #source-status { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+  <main id="app" tabindex="-1" data-state="loading">
+    <h1>CrossSafe</h1>
+    <noscript><p id="nojs" class="error">CrossSafe needs JavaScript to show the saved routes, their findings and the map. Turn on JavaScript for this page and reload it.</p></noscript>
+    <button id="lang" type="button" data-switch-to="es">ES · Spanish draft</button>
+    <p id="lang-note" hidden></p>
+    <p class="intro">Pick a saved route to Dulles High School to see what the mapped OpenStreetMap data shows, and doesn't say, about sidewalks and crossings along it. <span class="telemetry-strip"><span class="telemetry-pill"><strong>21</strong> ped crashes (2020-24)</span> <span class="telemetry-pill"><strong>12</strong> bike crashes (2020-24)</span> <span class="telemetry-pill"><strong>5.57</strong> walk R50/km</span> <span class="telemetry-pill"><strong>8.64</strong> bike R50/km</span> <span class="telemetry-pill"><strong>9.3 ms</strong> node score</span></span></p>
+    <p id="load-status" role="status" lang="en">Loading the saved routes and map data…</p>
+    <p id="load-error" class="error" role="alert" lang="en" hidden></p>
+    <button id="load-retry" type="button" lang="en" hidden>Try again</button>
+    <div class="pickers">
+      <div class="field">
+        <label for="school">School</label>
+        <select id="school"><option value="481965001818" selected>Dulles High School</option></select>
+      </div>
+      <div class="field">
+        <label for="route">Saved route</label>
+        <select id="route" disabled><option value="">Choose a saved route</option></select>
+      </div>
+    </div>
+    <button id="letter-open" type="button" disabled>Letter for this route</button>
+    <div id="map" role="region" aria-label="Map of the route" aria-describedby="map-hint" data-map="loading"></div>
+    <p id="map-hint">Arrow keys move the map. Plus and minus zoom. Press Tab to leave the map.</p>
+    <section id="results" aria-live="polite" aria-busy="true">
+      <div id="route-card">
+        <h2 id="route-heading"></h2>
+        <p id="route-note" hidden></p>
+        <p id="summary"></p>
+      </div>
+      <ol id="findings"></ol>
+    </section>
+    <div id="source-status" role="status"></div>
+    <article id="letter" aria-labelledby="letter-title" hidden>
+      <div id="letter-tools">
+        <button id="letter-print" type="button"></button>
+        <button id="letter-back" type="button"></button>
+      </div>
+      <h2 id="letter-title" tabindex="-1"></h2>
+      <p id="letter-to"></p>
+      <p id="letter-intro"></p>
+      <p id="letter-route"></p>
+      <h3 id="letter-findings-heading"></h3>
+      <ol id="letter-findings"></ol>
+      <div id="letter-foot">
+        <div id="letter-meta">
+          <h3 id="letter-dates-heading"></h3>
+          <ul id="letter-dates"></ul>
+          <p id="letter-credit"></p>
+        </div>
+        <figure id="letter-qr">
+          <img src="img/qr-live.svg" alt="" width="96" height="96">
+          <figcaption id="letter-url"></figcaption>
+        </figure>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

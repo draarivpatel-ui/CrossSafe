@@ -1,0 +1,23 @@
+node_modules/
+tests/screenshots/
+*.pyc
+__pycache__/
+# TxDOT + H-GAC raw rows: never committed (licence; see "README Data and licences template" below)
+data/raw/aadt*.json
+data/raw/crashes-*.json
+data/raw/cris*.json
+data/raw/hin*.json
+# non-JSON raw exports (CRIS Print-to-PDF, TxDOT/H-GAC CSV, Excel, zip downloads): never committed, any name, any depth
+data/raw/**/*.[pP][dD][fF]
+data/raw/**/*.[cC][sS][vV]
+data/raw/**/*.[xX][lL][sS]
+data/raw/**/*.[xX][lL][sS][xX]
+data/raw/**/*.[zZ][iI][pP]
+# raw OSM Overpass replies: never committed (size; the committed slim data/osm-*.json is the ODbL Derivative Database)
+data/raw/osm-*.json
+# CI artifact of the pass-count guard (test-spec K0h), never committed
+npm-test.tap
+# freeze-run logs (readme-skeleton Test counts): local working files, never committed
+test-results/
+# fetch.js run log next to the raw files (never committed)
+data/raw/fetch-log.json

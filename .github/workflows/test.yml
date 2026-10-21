@@ -1,0 +1,33 @@
+# .github/workflows/test.yml  (workflow name must be "tests")
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    defaults: { run: { shell: bash } }   # [CS-CI-PIPEFAIL] Fri Oct 16, 2026: explicit 'shell: bash' makes GitHub run each step as 'bash --noprofile --norc -eo pipefail {0}'; without it run steps get 'bash -e {0}' (no pipefail) and the 3:30 red SHA 0aa27fe (# fail 27) showed CI success
+    runs-on: ubuntu-24.04   # pinned: ubuntu-latest moves to 26.04 from Oct 19, 2026 (https://github.com/actions/runner-images/issues/14748)
+    steps:
+      - uses: actions/checkout@v4
+      - name: No raw TxDOT/H-GAC rows in the repo (licence)   # LIVE from the 1:10 skeleton (CS-CI-SKEL-SIM, Thu Oct 15, 2026 ~1:50 PM EDT): the 'README Data and licences template + raw-data CI guard' section says add it right after checkout, but the template never carried it, so a verbatim paste dropped commit-cadence-spec #7's last licence layer; green at the skeleton (no data/raw/ -> n=0)
+        run: |
+          n=$(git ls-files 'data/raw/aadt*' 'data/raw/crashes-*' 'data/raw/cris*' 'data/raw/hin*' | wc -l)
+          echo "tracked raw TxDOT/H-GAC files: $n"; test "$n" -eq 0
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }   # switched 20→22 Wed Oct 14, 2026 ~11:45 AM EDT: Node 20 EOL 2026-04-30, Node 22 'Jod' maintenance LTS to 2027-04-30 (nodejs/Release schedule.json); actions/node-versions serves 22.23.3 = the sandbox Node every jsdom/axe/node:test lock ran on; TAP reporting verified identical on 20.20.2 and 22.23.3 ('npm test final mode')
+      - run: npm ci
+      - run: npm run -s test:ci | tee npm-test.tap      # K0i (Fri Oct 16, 2026 6:40 PM EDT, sub-w180; was 'npm test | tee npm-test.tap'): test:ci = node --test tests/*.test.js with TAP on stdout + tests/_ran-files-reporter.mjs -> /tmp/ran-files.txt; pipefail comes from jobs.test defaults 'shell: bash' (-eo pipefail), so a failing npm test fails the step despite '| tee' (GitHub's implicit default is 'bash -e', no pipefail: fixed Fri Oct 16, 2026, CS-CI-PIPEFAIL)
+      - run: grep -Eq '^# pass [1-9]' npm-test.tap      # added Wed Oct 14, 2026 ~11:45 AM EDT with the Node 22 switch: on Node 22 an empty/misnamed tests/ gives '# tests 0', exit 0 (fails open); Node 20 failed closed; checked by test-spec K0h + mutation K0h-m (smoke.test.js → smoke.tst.js → guard exit 1)
+      # From Sat Oct 17's first commit (K0i, added Wed Oct 14, 2026 ~12:25 PM EDT; was 'the Fri 3:30 PM tests-first commit' until Wed Oct 14, 2026 ~2:05 PM EDT, RF-9): the npm test step above becomes `- run: npm run -s test:ci | tee npm-test.tap` and this step follows the guard (uncomment all three lines; card: friday-1530-1700-card.md step 3):
+      - name: K0i expected test files ran (test-spec K0i)   # uncommented Fri Oct 16, 2026 6:40 PM EDT (sub-w180, K0i commit pulled forward from Sat Oct 17); mutation K0i-m. Block form since Wed Oct 14, 2026 ~1:50 PM EDT (RF-7): the old one-line '- run: … echo 'K0i: < …'' form is invalid YAML once uncommented (': ' inside a plain scalar; PyYAML 'mapping values are not allowed here'), which would make the whole workflow fail to load
+        run: |
+          sort -u tests/expected-files.txt | diff - /tmp/ran-files.txt || { echo 'K0i: < expected but no test ran, > ran but not in tests/expected-files.txt'; exit 1; }
+      #   guard meaning (Wed Oct 14, 2026 ~12:15 PM EDT): '≥1 test passed in a run that already exited 0'; catches an empty/unmatched glob only, NOT one missing file (smoke + SW-K0 alone give '# pass 2'); see 'Friday npm test counts'
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -r requirements-dev.txt && python -m playwright install --with-deps chromium   # requirements-dev.txt = playwright==1.63.0 (version every green run used Oct 12, 2026) + pillow==12.3.0 (P10); changed Oct 14 from a bare playwright pin; + segno==1.6.6 and zxing-cpp==3.1.1 (Fri Oct 16, 2026, wave 186: e2e re-encodes and decodes the letter QR, test-spec L5; test-only, the page loads neither)
+      - run: python tests/e2e.py
+      - run: python scripts/check-data.py   # COMMENTED at the 1:10 skeleton (CS-DRILL-DRYREAD, Thu Oct 15, 2026 ~12:35 PM EDT: live, it is red CI until scripts/check-data.py exists); friday-1335-1530-card step 5 uncomments it in the 3:10 data push. Added Wed Oct 14, 2026 ~12:15 PM EDT: the template had no check-data step although test plan C says 'in CI'; this line goes in with the Fri 3:10 PM data commit (not the 1:10 skeleton: no data/ or script yet); DS1-DS5 + O35/O36
+      - name: No i18n review markers in shipped strings (i18n-test-spec item 1)   # uncommented Fri Oct 16, 2026 (sub-w181) with the first i18n/*.json commit (en.json + es.json, §9 route labels). Was COMMENTED until the first commit that adds i18n/*.json (CS-DRILL-DRYREAD, Thu Oct 15, 2026 ~12:35 PM EDT: live, it fails closed = red CI on every push without i18n/*.json); uncomment the 5 lines with that commit. Added Wed Oct 14, 2026 ~1:00 PM EDT; goes in with the first commit that adds i18n/*.json (fails closed without them); mutation I18N-m1
+        run: |
+          s=0; grep -niF -e '⟦' -e '⟧' -e '**' -e '[ES-REVIEW' -e '\u27e6' -e '\u27e7' i18n/*.json || s=$?
+          [ "$s" -eq 1 ] || { echo "I18N-MARKERS FAIL (grep exit $s): review marker above in i18n/*.json, or no i18n/*.json"; exit 1; }
+          echo "I18N-MARKERS OK: $(ls i18n/*.json | wc -l) file(s), 0 markers"
