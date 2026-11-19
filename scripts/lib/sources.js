@@ -27,4 +27,4 @@ function curl(url, out) {
   if (code.trim() !== '200') throw new Error(`HTTP ${code.trim()} for ${url}`);
   return fs.readFileSync(out);
 }
-module.exports = { ROOT, SRC, UA, isoNow, sha256, load, update, curl };
+module.exports = { ROOT, UA, isoNow, sha256, load, update, curl };

@@ -20,7 +20,6 @@ const EN_ONLY_KEYS = ['LANG_TOGGLE_TO_ES', 'LANG_TOGGLE_TO_EN', 'LANG_DRAFT_NOTE
   'LETTER_FINDINGS_HEADING', 'LETTER_DATES_HEADING', 'LETTER_CRIS_AS_OF', 'LETTER_CREDIT',
   // letter QR (wave 186, test-spec §L L5)
   'LETTER_QR_ALT'];
-const LANGS = ['en', 'es'];
 
 // dicts = { en: parsed en.json, es: parsed es.json }. Returns { text, lang }: lang is the language the text is really in.
 function t(dicts, lang, key) {
@@ -59,4 +58,4 @@ function routeOptions(dict, routes) {
   return [dict.ROUTE_PLACEHOLDER, ...routes.map((r) => routeLabel(dict, r.stem, r.meta).label)];
 }
 
-module.exports = { KEYS, EN_ONLY_KEYS, LANGS, t, fill, modeOf, routeLabel, routeOptions };
+module.exports = { KEYS, EN_ONLY_KEYS, t, fill, routeLabel, routeOptions };

@@ -177,4 +177,4 @@ function scoreRoute(snap, route, opts = {}) {
   return { mode, route_m, raw, rri, stretch_m: st.groups.reduce((s, g) => s + g.length_m, 0), n_stretches: st.groups.length, n_crossings: pieces.filter((p) => p.kind === 'crossing').length, n_entrances: entrances.length, unknown_share, confidence, pieces };
 }
 
-module.exports = { scoreRoute, fromGeoJSON, lengthM, isEntranceTags, STRETCH_R, PIECE_M, PARALLEL_DEG, SIDE_PROBE_M, SIDE_MIN_M };
+module.exports = { scoreRoute, fromGeoJSON, lengthM, isEntranceTags };

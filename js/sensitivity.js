@@ -270,6 +270,6 @@ function blockOf(text) {
 }
 
 module.exports = {
-  SENS_SEED, MC_DRAWS, PASS_OVERLAP, CLASSES, STEP1, STEP3, MC_KEYS, weights, capture, stretchA, crossingK, rriOf, findings,
+  SENS_SEED, PASS_OVERLAP, weights, capture, stretchA, crossingK, rriOf, findings,
   evaluate, compare, monteCarlo, run, readmeBlock, blockOf, BLOCK_START, BLOCK_END,
 };
