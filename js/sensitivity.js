@@ -32,7 +32,6 @@ const PASS_OVERLAP = 8; // spec step 1: pass = overlap@10 >= 8 and the demo rout
 const RANGE_PTS = 10; // spec step 2: show the score as a range when best/worst differ by more than 10 points
 const CLASSES = ['residential', 'living_street', 'service', 'unclassified', 'tertiary', 'secondary', 'primary', 'trunk'];
 
-const r3 = (x) => Math.round(x * 1000) / 1000;
 const r6 = (x) => (x == null ? null : Math.round(x * 1e6) / 1e6);
 const baseClass = (h) => String(h || '').replace(/_link$/, '');
 
