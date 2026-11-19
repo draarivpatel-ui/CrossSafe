@@ -147,6 +147,6 @@ function parseBlock(text) {
 }
 
 module.exports = {
-  MIN_SUCCESS, CAR_KMH, MODES, REASONS, classify, median, summarize, score100, computeRef, computeR50,
+  MODES, classify, median, summarize, score100, computeRef, computeR50,
   buildReport, serializeReport, readmeBlock, parseBlock, fmtReasons, BLOCK_START, BLOCK_END,
 };

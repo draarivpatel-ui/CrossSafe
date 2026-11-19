@@ -418,5 +418,5 @@ function inZone(school, point) {
 
 module.exports = {
   scoreCrossing, scoreAllCrossings, scoreStretch, scoreAtGrade, crossingEvents, crossingWeightByRoad, modeSpeed, inZone, historyWeight,
-  vFromMph, parseMph, routeKey,
+  vFromMph,
 };

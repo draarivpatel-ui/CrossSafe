@@ -89,4 +89,4 @@ function serializeSample(s) {
   return h.slice(0, -2) + ',\n  "points": [\n' + lines.join(',\n') + '\n  ]\n}\n';
 }
 
-module.exports = { REF_SEED, REF_N, NCES_POINT, MIN_M, MAX_M, mulberry32, inBounds, wayMidpoint, refCandidates, buildSample, serializeSample };
+module.exports = { REF_SEED, NCES_POINT, mulberry32, inBounds, refCandidates, buildSample, serializeSample };

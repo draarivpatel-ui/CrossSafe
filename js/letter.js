@@ -124,4 +124,4 @@ function renderLetterButton(doc, dicts, lang, enabled) {
   b.disabled = !enabled;
 }
 
-module.exports = { KEYS, letterRows, letterCris, letterUrl, renderLetter, renderLetterButton };
+module.exports = { KEYS, letterCris, letterUrl, renderLetter, renderLetterButton };
